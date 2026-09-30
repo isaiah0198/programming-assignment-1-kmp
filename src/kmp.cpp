@@ -24,12 +24,37 @@ std::vector<int> buildLPS(const std::string& pattern) {
     return lps;
 }
 
-// TODO: your next task
 int kmpSearch(const std::string& text, const std::string& pattern) {
+    if (pattern.empty()) {
+        return 0;
+    }
+
+    std::vector<int> lps = buildLPS(pattern);
+
+    // text index
+    int i = 0;
+    // pattern index
+    int j = 0;
+
+    while (i < text.size()) {
+        if (text[i] == pattern[j]) {
+            ++i;
+            ++j;
+
+            if (j == pattern.size()){
+                return i - j;
+            }
+        }
+        else if (j > 0) {
+            j = lps[j - 1];
+        }
+        else {
+            ++i;
+        }
+    }
     return -1;
 }
 
-// TODO: after kmpSearch
 int naiveSearch(const std::string& text, const std::string& pattern) {
     return -1;
 }
