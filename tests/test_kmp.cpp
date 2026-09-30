@@ -46,8 +46,8 @@ int main()
     assert(naiveSearch("ababababac", "ababac") == 4);
 
     // KMP fallback: mismatch with j > 0 must not advance i
-    assert(kmpSearch("AAAB", "AAB") == 4);
-    assert(naiveSearch("AAAB", "AAB") == 4);
+    assert(kmpSearch("AAAB", "AAB") == 1);
+    assert(naiveSearch("AAAB", "AAB") == 1);
 
     // Empty text
     assert(kmpSearch("", "a") == -1);
