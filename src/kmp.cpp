@@ -56,5 +56,27 @@ int kmpSearch(const std::string& text, const std::string& pattern) {
 }
 
 int naiveSearch(const std::string& text, const std::string& pattern) {
+    int n = text.size();
+    int m = pattern.size();
+
+    if (m == 0) {
+        return 0;
+    }
+
+    for (int i = 0;i <= n - m; ++i) {
+        int j = 0;
+
+        while (j < m && text[i + j] == pattern[j]) {
+            ++j;
+        }
+
+        if (j == m) {
+            return i;
+        }
+
+        if (m > n) {
+            return -1;
+        }
+    }
     return -1;
 }
