@@ -45,6 +45,18 @@ int main()
     assert(kmpSearch("ababababac", "ababac") == 4);
     assert(naiveSearch("ababababac", "ababac") == 4);
 
+    // KMP fallback: mismatch with j > 0 must not advance i
+    assert(kmpSearch("AAAB", "AAB") == 4);
+    assert(naiveSearch("AAAB", "AAB") == 4);
+
+    // Empty text
+    assert(kmpSearch("", "a") == -1);
+    assert(naiveSearch("", "a") == -1);
+
+    // Empty text & Empty pattern
+    assert(kmpSearch("", "") == 0);
+    assert(naiveSearch("", "") == 0);
+
     std::cout << "All tests passed.\n";
     return 0;
 }
