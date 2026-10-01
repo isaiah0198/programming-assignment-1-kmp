@@ -10,6 +10,9 @@ target_include_directories(kmp_lib PUBLIC src)
 add_executable(kmp src/main.cpp)
 target_link_libraries(kmp PRIVATE kmp_lib)
 
+add_executable(benchmark benchmark/benchmark.cpp)
+target_link_libraries(benchmark PRIVATE kmp_lib)
+
 enable_testing()
 
 add_executable(test_kmp tests/test_kmp.cpp)

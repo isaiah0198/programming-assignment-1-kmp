@@ -1,0 +1,7 @@
+/Users/isaiahlane/programming-assignment-1-kmp/build-release/CMakeFiles/kmp_lib.dir
+/Users/isaiahlane/programming-assignment-1-kmp/build-release/CMakeFiles/kmp.dir
+/Users/isaiahlane/programming-assignment-1-kmp/build-release/CMakeFiles/benchmark.dir
+/Users/isaiahlane/programming-assignment-1-kmp/build-release/CMakeFiles/test_kmp.dir
+/Users/isaiahlane/programming-assignment-1-kmp/build-release/CMakeFiles/test.dir
+/Users/isaiahlane/programming-assignment-1-kmp/build-release/CMakeFiles/edit_cache.dir
+/Users/isaiahlane/programming-assignment-1-kmp/build-release/CMakeFiles/rebuild_cache.dir
