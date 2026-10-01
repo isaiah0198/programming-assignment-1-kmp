@@ -1,2 +1,0 @@
-/usr/bin/ar qc libkmp_lib.a CMakeFiles/kmp_lib.dir/src/kmp.cpp.o
-/usr/bin/ranlib libkmp_lib.a
