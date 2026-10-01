@@ -61,6 +61,7 @@ int main() {
     std::vector<int> sizes = { 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000 };
     int runs = 51;
 
+    // Experiment 1 - Random text and pattern
     for (int size : sizes) {
         std::string text = randomText(size, 26);
         std::string pattern = randomText(20, 26);
@@ -83,6 +84,31 @@ int main() {
         std::cout << "Naive,text_size,"
           << size << ",20,random,26,"
           << naiveTime << '\n';
+
+        // Experiment 2 - Repetitive text with a single different character at the end
+
+        std::vector<int> repSizes = { 1000, 10000, 100000, 1000000 };
+
+        for (int size : repSizes) {
+            std::string text = repetitiveText(size, 'A', 'B');
+            std::string pattern = repetitiveText(20, 'A', 'B');
+
+            int kmpResult = kmpSearch(text, pattern);
+            int naiveResult = naiveSearch(text, pattern);
+
+            if (kmpResult != naiveResult) {
+                std::cerr << "Repetitive text, size: " << size << ", naive: " << naiveResult << ", kmp: " << kmpResult << "\n";
+                return 1;
+            }
+
+            long long kmpTime = timeSearch(kmpSearch, text, pattern, runs);
+            long long naiveTime = timeSearch(naiveSearch, text, pattern, runs);
+
+            std::cout << "KMP,repetitive_text," << size << ",20,repetitive,26," << kmpTime << '\n';
+            std::cout << "Naive,repetitive_text," << size << ",20,repetitive,26," << naiveTime << '\n';
+
+        }
+        
     }
 
     return 0;
