@@ -58,7 +58,11 @@ long long timeSearch(SearchFn search, const std::string& text, const std::string
 int main() {
     std::cout << "algorithm,experiment,text_size,pattern_size,input_type,alphabet_size,time_ns\n";
 
-    std::vector<int> sizes = { 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000 };
+    std::vector<int> sizes = {
+        1000, 5000, 10000, 50000, 100000,
+        500000, 1000000, 5000000, 10000000
+    };
+
     int runs = 51;
 
     // Experiment 1 - Random text and pattern
@@ -73,42 +77,44 @@ int main() {
         long long naiveTime = timeSearch(naiveSearch, text, pattern, runs);
 
         if (kmpResult != naiveResult) {
-                std::cerr << "Random text, size: " << size << ", naive: " << naiveResult << ", kmp: " << kmpResult << "\n";
-                return 1;
+            std::cerr << "Random text, size: " << size << ", naive: " << naiveResult << ", kmp: " << kmpResult << "\n";
+            return 1;
         }
 
-        std::cout << "KMP,text_size,"
-          << size << ",20,random,26,"
-          << kmpTime << '\n';
+        std::cout << "KMP,text_size," << size << ",20,random,26," << kmpTime << '\n';
 
-        std::cout << "Naive,text_size,"
-          << size << ",20,random,26,"
-          << naiveTime << '\n';
+        std::cout << "Naive,text_size," << size << ",20,random,26," << naiveTime << '\n';
+    }
 
-        // Experiment 2 - Repetitive text with a single different character at the end
+    // Experiment 2 - Repetitive text with a single different character at the end
+    std::vector<int> repSizes = {
+        1000, 10000, 100000, 1000000
+    };
 
-        std::vector<int> repSizes = { 1000, 10000, 100000, 1000000 };
+    for (int size : repSizes) {
+        std::string text = repetitiveText(size, 'A', 'B');
+        std::string pattern = repetitiveText(20, 'A', 'B');
 
-        for (int size : repSizes) {
-            std::string text = repetitiveText(size, 'A', 'B');
-            std::string pattern = repetitiveText(20, 'A', 'B');
+        int kmpResult = kmpSearch(text, pattern);
+        int naiveResult = naiveSearch(text, pattern);
 
-            int kmpResult = kmpSearch(text, pattern);
-            int naiveResult = naiveSearch(text, pattern);
-
-            if (kmpResult != naiveResult) {
-                std::cerr << "Repetitive text, size: " << size << ", naive: " << naiveResult << ", kmp: " << kmpResult << "\n";
-                return 1;
-            }
-
-            long long kmpTime = timeSearch(kmpSearch, text, pattern, runs);
-            long long naiveTime = timeSearch(naiveSearch, text, pattern, runs);
-
-            std::cout << "KMP,repetitive_text," << size << ",20,repetitive,26," << kmpTime << '\n';
-            std::cout << "Naive,repetitive_text," << size << ",20,repetitive,26," << naiveTime << '\n';
-
+        if (kmpResult != naiveResult) {
+            std::cerr << "Repetitive text, size: " << size
+                      << ", naive: " << naiveResult
+                      << ", kmp: " << kmpResult << "\n";
+            return 1;
         }
-        
+
+        long long kmpTime = timeSearch(kmpSearch, text, pattern, runs);
+        long long naiveTime = timeSearch(naiveSearch, text, pattern, runs);
+
+        std::cout << "KMP,repetitive_text,"
+                  << size << ",20,repetitive,2,"
+                  << kmpTime << '\n';
+
+        std::cout << "Naive,repetitive_text,"
+                  << size << ",20,repetitive,2,"
+                  << naiveTime << '\n';
     }
 
     return 0;
