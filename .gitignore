@@ -1,3 +1,5 @@
 build/
-ai_log.mdbuild-release/
+build-release/
 .venv/
+.DS_Store
+ai_log.md
